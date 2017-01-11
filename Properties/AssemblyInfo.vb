@@ -8,12 +8,12 @@ Imports System.Runtime.InteropServices
 ' change them to the information which is associated with the assembly
 ' you compile.
 
-<assembly: AssemblyTitle("Zigiri Dictionary 0.3 Classic Beta")>
+<assembly: AssemblyTitle("")>
 <assembly: AssemblyDescription("")>
 <assembly: AssemblyConfiguration("")>
-<assembly: AssemblyCompany("N-Soft")>
-<assembly: AssemblyProduct("Zigiri Dictionary 0.3 Classic")>
-<assembly: AssemblyCopyright("Copyright 2016 Navinda Dissanayake")>
+<assembly: AssemblyCompany("")>
+<assembly: AssemblyProduct("Zigiri Dictionary")>
+<assembly: AssemblyCopyright("")>
 <assembly: AssemblyTrademark("")>
 <assembly: AssemblyCulture("")>
 
