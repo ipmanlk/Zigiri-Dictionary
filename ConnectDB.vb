@@ -6,34 +6,28 @@
 '
 Imports System.Data.Oledb 
 Imports System.IO 
-Public Module Comp	
-    Public found As Boolean 
-	Public count As Integer
-	Public ds As New System.Data.DataSet() 'Dataset
-	Public MaxRows As Integer 'Maximum Number of Rows in the table 
-	Public MaxRows2 As Integer 'Maximum Number of Rows in the table2 
+Public Module ConnectDB
+	Public ds As New System.Data.DataSet() 
 	Dim DBProvider As String = "PROVIDER=Microsoft.Jet.OLEDB.4.0;"
 	Dim DataSource As String = "Data Source=" & Path.GetTempPath & "\endbase.mdb;"
 	Dim Pass As String = "Jet OLEDB:Database Password=nqq1fdst;"	
-	Dim con As New OledbConnection 'Connection		
-	Dim sql As String = "SELECT * FROM WORD" 'SQL CODE
+	Dim con As New OledbConnection 	
+	Dim sql As String = "SELECT * FROM WORD" 
 	Dim  da As New OleDbDataAdapter(sql,con)
 	
-	Public Sub ConnectDatabse()
+	Public Sub ConnectDatabse() 'Connect with databases.
 		con.ConnectionString = DBProvider & DataSource & Pass
 		con.Open() 'Opening the Connection	
-		da.Fill(ds,"endbase") 'Filling the dataset	
-		MaxRows = ds.Tables("endbase").Rows.Count
+		da.Fill(ds,"endbase") 'adding english to sinhala table to dataset.	
 		con.Close 'Closing the connection
 		
 		DataSource = "Data Source=" & Path.GetTempPath & "\sndbase.mdb;"
 		sql =  "SELECT * FROM VACHANA"
 		Dim da2 As New OleDbDataAdapter(sql,con)
 		con.ConnectionString = DBProvider & DataSource & Pass
-		con.Open() 'Opening the Connection
-		da2.Fill(ds,"sndbase") 'Filling the dataset	
-		MaxRows2 = ds.Tables("sndbase").Rows.Count
-		con.Close 'Closing the connection
+		con.Open() 
+		da2.Fill(ds,"sndbase") 'adding sinhala to english table to dataset.
+		con.Close 
 	End Sub
 	
 	Public Sub ExtractDatabase

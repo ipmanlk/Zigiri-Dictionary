@@ -38,17 +38,21 @@ Partial Class MainForm
 		Me.find = New System.Windows.Forms.Button()
 		Me.groupBox2 = New System.Windows.Forms.GroupBox()
 		Me.output = New System.Windows.Forms.ListBox()
-		Me.statusStrip1 = New System.Windows.Forms.StatusStrip()
+		Me.statusStrip = New System.Windows.Forms.StatusStrip()
 		Me.toolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
 		Me.checkForUpdatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.aboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.trayicon = New System.Windows.Forms.NotifyIcon(Me.components)
 		Me.rightclickmenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
 		Me.copyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.pictureBox1 = New System.Windows.Forms.PictureBox()
+		Me.checking_updates = New System.Windows.Forms.Panel()
 		Me.groupBox1.SuspendLayout
 		Me.groupBox2.SuspendLayout
-		Me.statusStrip1.SuspendLayout
+		Me.statusStrip.SuspendLayout
 		Me.rightclickmenu.SuspendLayout
+		CType(Me.pictureBox1,System.ComponentModel.ISupportInitialize).BeginInit
+		Me.checking_updates.SuspendLayout
 		Me.SuspendLayout
 		'
 		'groupBox1
@@ -68,7 +72,7 @@ Partial Class MainForm
 		Me.input.Location = New System.Drawing.Point(11, 29)
 		Me.input.Name = "input"
 		Me.input.Size = New System.Drawing.Size(206, 26)
-		Me.input.TabIndex = 3
+		Me.input.TabIndex = 1
 		AddHandler Me.input.KeyPress, AddressOf Me.InputKeyPress
 		'
 		'find
@@ -102,20 +106,19 @@ Partial Class MainForm
 		Me.output.TabIndex = 0
 		AddHandler Me.output.MouseDown, AddressOf Me.OutputMouseDown
 		'
-		'statusStrip1
+		'statusStrip
 		'
-		Me.statusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripDropDownButton1})
-		Me.statusStrip1.Location = New System.Drawing.Point(0, 307)
-		Me.statusStrip1.Name = "statusStrip1"
-		Me.statusStrip1.Size = New System.Drawing.Size(303, 22)
-		Me.statusStrip1.TabIndex = 4
-		Me.statusStrip1.Text = "statusStrip1"
+		Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripDropDownButton1})
+		Me.statusStrip.Location = New System.Drawing.Point(0, 307)
+		Me.statusStrip.Name = "statusStrip"
+		Me.statusStrip.Size = New System.Drawing.Size(303, 22)
+		Me.statusStrip.TabIndex = 4
+		Me.statusStrip.Text = "statusStrip"
 		'
 		'toolStripDropDownButton1
 		'
 		Me.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
 		Me.toolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.checkForUpdatesToolStripMenuItem, Me.aboutToolStripMenuItem})
-		Me.toolStripDropDownButton1.Enabled = false
 		Me.toolStripDropDownButton1.Image = CType(resources.GetObject("toolStripDropDownButton1.Image"),System.Drawing.Image)
 		Me.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
 		Me.toolStripDropDownButton1.Name = "toolStripDropDownButton1"
@@ -134,6 +137,7 @@ Partial Class MainForm
 		Me.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem"
 		Me.aboutToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
 		Me.aboutToolStripMenuItem.Text = "About"
+		AddHandler Me.aboutToolStripMenuItem.Click, AddressOf Me.AboutToolStripMenuItemClick
 		'
 		'trayicon
 		'
@@ -155,12 +159,33 @@ Partial Class MainForm
 		Me.copyToolStripMenuItem.Text = "Copy"
 		AddHandler Me.copyToolStripMenuItem.Click, AddressOf Me.CopyToolStripMenuItemClick
 		'
+		'pictureBox1
+		'
+		Me.pictureBox1.Image = CType(resources.GetObject("pictureBox1.Image"),System.Drawing.Image)
+		Me.pictureBox1.Location = New System.Drawing.Point(80, 84)
+		Me.pictureBox1.Name = "pictureBox1"
+		Me.pictureBox1.Size = New System.Drawing.Size(128, 128)
+		Me.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+		Me.pictureBox1.TabIndex = 0
+		Me.pictureBox1.TabStop = false
+		'
+		'checking_updates
+		'
+		Me.checking_updates.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+		Me.checking_updates.Controls.Add(Me.pictureBox1)
+		Me.checking_updates.Location = New System.Drawing.Point(7, 7)
+		Me.checking_updates.Name = "checking_updates"
+		Me.checking_updates.Size = New System.Drawing.Size(288, 297)
+		Me.checking_updates.TabIndex = 5
+		Me.checking_updates.Visible = false
+		'
 		'MainForm
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.ClientSize = New System.Drawing.Size(303, 329)
-		Me.Controls.Add(Me.statusStrip1)
+		Me.Controls.Add(Me.checking_updates)
+		Me.Controls.Add(Me.statusStrip)
 		Me.Controls.Add(Me.groupBox2)
 		Me.Controls.Add(Me.groupBox1)
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -169,25 +194,29 @@ Partial Class MainForm
 		Me.Name = "MainForm"
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
 		Me.Text = "Zigiri Dictionary"
-		AddHandler FormClosed, AddressOf Me.MainFormFormClosed
 		AddHandler Load, AddressOf Me.MainFormLoad
 		AddHandler Resize, AddressOf Me.MainFormResize
 		Me.groupBox1.ResumeLayout(false)
 		Me.groupBox1.PerformLayout
 		Me.groupBox2.ResumeLayout(false)
-		Me.statusStrip1.ResumeLayout(false)
-		Me.statusStrip1.PerformLayout
+		Me.statusStrip.ResumeLayout(false)
+		Me.statusStrip.PerformLayout
 		Me.rightclickmenu.ResumeLayout(false)
+		CType(Me.pictureBox1,System.ComponentModel.ISupportInitialize).EndInit
+		Me.checking_updates.ResumeLayout(false)
+		Me.checking_updates.PerformLayout
 		Me.ResumeLayout(false)
 		Me.PerformLayout
 	End Sub
+	Friend checking_updates As System.Windows.Forms.Panel
+	Private pictureBox1 As System.Windows.Forms.PictureBox
 	Private copyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Private rightclickmenu As System.Windows.Forms.ContextMenuStrip
 	Private trayicon As System.Windows.Forms.NotifyIcon
 	Private aboutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Private checkForUpdatesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Private toolStripDropDownButton1 As System.Windows.Forms.ToolStripDropDownButton
-	Private statusStrip1 As System.Windows.Forms.StatusStrip
+	Private statusStrip As System.Windows.Forms.StatusStrip
 	Public output As System.Windows.Forms.ListBox
 	Private groupBox2 As System.Windows.Forms.GroupBox
 	Private groupBox1 As System.Windows.Forms.GroupBox

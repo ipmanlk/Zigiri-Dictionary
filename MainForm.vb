@@ -16,28 +16,27 @@ Public Partial Class MainForm
 	End Sub
 		
 	Sub MainFormLoad(sender As Object, e As EventArgs)
-		Call ExtractDatabase()
+		If My.Computer.FileSystem.FileExists(Path.GetTempPath & "\endbase.mdb") Then
+			Call ConnectDatabse()
+		Else 
+			Call ExtractDatabase()
+		End If
 	End Sub
 	
 	Sub FindClick(sender As Object, e As EventArgs)
-		word = input.Text
-		Call SearchMeaning(word)
-	End Sub
-	
-	
-	Sub MainFormFormClosed(sender As Object, e As FormClosedEventArgs)
-		My.Computer.FileSystem.DeleteFile(Path.GetTempPath & "\endbase.mdb")
-		My.Computer.FileSystem.DeleteFile(Path.GetTempPath & "\sndbase.mdb")
+		SearchWord = input.Text
+		Call SearchMeaning()
 	End Sub
 	
 	Sub InputKeyPress(sender As Object, e As KeyPressEventArgs)
 	 	If e.KeyChar = ChrW(Keys.Enter) Then
-        	word = input.Text
-			Call SearchMeaning(word)
+        	SearchWord = input.Text
+			Call SearchMeaning()
         End If
 	End Sub
 	
 	Sub CheckForUpdatesToolStripMenuItemClick(sender As Object, e As EventArgs)
+		checking_updates.Visible=True
 		CheckforUpdate()
 	End Sub
 	
@@ -56,4 +55,9 @@ Public Partial Class MainForm
 	End Sub
 	
 	
+	Sub AboutToolStripMenuItemClick(sender As Object, e As EventArgs)
+		MsgBox("Version 0.1.0" & vbNewLine & "Created By Navinda Dissanayake." & 
+			vbNewLine & "Visit : www.navinda.space for more information.")
+		
+	End Sub
 End Class

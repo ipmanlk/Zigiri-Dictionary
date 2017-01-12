@@ -17,9 +17,9 @@ Public Partial Class Suggest
 	
 	
 	Sub Button1Click(sender As Object, e As EventArgs)
-		word = suggestbox.Text
-		MainForm.input.Text = word 
-		SearchMeaning(word)
+		SearchWord = suggestbox.Text
+		MainForm.input.Text = SearchWord
+		SearchMeaning()
 		Me.Close
 	End Sub
 	
