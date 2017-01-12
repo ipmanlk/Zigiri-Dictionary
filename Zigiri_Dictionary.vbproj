@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <OutputType>WinExe</OutputType>
     <MyType>WindowsForms</MyType>
-    <RootNamespace>Zigiri_Dictionary_0.__Classic</RootNamespace>
-    <AssemblyName>Zigiri Dictionary</AssemblyName>
+    <RootNamespace>Zigiri_Dictionary</RootNamespace>
+    <AssemblyName>Zigiri_Dictionary</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <OptionInfer>On</OptionInfer>
@@ -32,6 +32,7 @@
     <DebugType>None</DebugType>
     <Optimize>True</Optimize>
     <DefineConstants>TRACE=1</DefineConstants>
+    <StartAction>Project</StartAction>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

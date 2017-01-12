@@ -14,16 +14,27 @@ Public Partial Class Suggest
 		'
 	End Sub
 	
-	
-	
 	Sub Button1Click(sender As Object, e As EventArgs)
-		SearchWord = suggestbox.Text
-		MainForm.input.Text = SearchWord
-		SearchMeaning()
-		Me.Close
+		Call WordSuggested
 	End Sub
 	
 	Sub NobtnClick(sender As Object, e As EventArgs)
 		Me.Close
+	End Sub
+	
+	
+	Sub SuggestboxDoubleClick(sender As Object, e As EventArgs)
+		Call WordSuggested
+	End Sub
+	
+	Sub WordSuggested()
+		SearchWord = suggestbox.Text
+		If String.IsNullOrEmpty(suggestbox.Text) Then
+			MsgBox("Please select your word first!")
+		Else
+			MainForm.input.Text = SearchWord
+			SearchMeaning()
+			Me.Close
+		End If
 	End Sub
 End Class

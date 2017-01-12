@@ -47,6 +47,7 @@ Partial Class Suggest
 		Me.suggestbox.Name = "suggestbox"
 		Me.suggestbox.Size = New System.Drawing.Size(354, 244)
 		Me.suggestbox.TabIndex = 0
+		AddHandler Me.suggestbox.DoubleClick, AddressOf Me.SuggestboxDoubleClick
 		'
 		'label1
 		'

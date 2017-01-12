@@ -52,9 +52,12 @@ Partial Class Splash
 		Me.ClientSize = New System.Drawing.Size(364, 84)
 		Me.Controls.Add(Me.label1)
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+		Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
 		Me.Name = "Splash"
+		Me.ShowInTaskbar = false
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
 		Me.Text = "Loading..."
+		AddHandler Load, AddressOf Me.SplashLoad
 		Me.ResumeLayout(false)
 	End Sub
 	Private label1 As System.Windows.Forms.Label

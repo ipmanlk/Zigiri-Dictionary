@@ -11,22 +11,24 @@ Public Module search
 	Dim count As Integer
 	Dim sugWord,SearchWord1stLetter,sugWord1stLetter,DataBaseTable As String
 	Public found As Boolean 
+	Public myversion As String = "0.1.1"
 	'0 = Mainform output box
 	'1=  Suggestion form output box
 	
 	Public Sub SearchMeaning() 'User input word goes here.
+		MainForm.input.Text = MainForm.input.Text.Trim
 		SearchWord = SearchWord.Trim
 		SearchWord = SearchWord.ToLower
 		
 		For Each c As Char In SearchWord 'Checking the language of input word.
-            If AscW(c) > 3457 And AscW(c) < 3576 Then 
-            	GetMeaning("sndbase") 'if word is in sinhala, search on sinhala to english database.
-            	language = 1
-            Else
-            	GetMeaning("endbase") 'if word is in english, search on english to sinhala database.
-            	language = 0
-               Exit For
-            End If
+			If AscW(c) > 3457 And AscW(c) < 3576 Then 
+				GetMeaning("sndbase") 'if word is in sinhala, search on sinhala to english database.
+				language = 1
+			Else
+				GetMeaning("endbase") 'if word is in english, search on english to sinhala database.
+				language = 0
+				Exit For
+			End If
 		Next
 		
 		If found = False  Then 'if word not found, try to suggest words.
@@ -35,9 +37,7 @@ Public Module search
 			Else
 				Call SuggestWords("sndbase")
 			End If
-				
-			If found=False Then MsgBox("Word not found!") 'if suggestion failed, show not found msg.		
-			
+			If found=False Then MsgBox("Word not found!") 'if suggestion failed, show not found msg.
 		End If
 	End Sub
 	
@@ -46,7 +46,8 @@ Public Module search
 		found = False 'Reset status of found variable
 		For count = 0 To ((ds.Tables(dbtable).Rows.Count)-1)
 			If ds.tables(dbtable).Rows(count).Item(0) = SearchWord Then
-				AddtoOutputListBox(ds.tables(dbtable).Rows(count).Item(1),0)		
+				AddtoOutputListBox(ds.tables(dbtable).Rows(count).Item(1),0)	
+				count = ((ds.Tables(dbtable).Rows.Count)-1)
 			End If 
 		Next 					
 	End Sub
@@ -61,8 +62,8 @@ Public Module search
 				If sugWord.Substring(0,1) = SearchWord1stLetter Then  'if it's starting from the same character
 					AddtoOutputListBox(sugWord,1) 'add meanings to suggestion box
 					Suggest.show
-				End If 
-				
+					count = ((ds.Tables(dbtable).Rows.Count)-1)
+				End If
 			End If 
 		Next 
 	End Sub
@@ -74,9 +75,9 @@ Public Module search
 			If whereto = 0 Then 'add to mainform list box.
 				MainForm.output.Items.Add(item.Trim)
 			Else 'add to suggestion form list box.
-				 Suggest.suggestbox.Items.Add(item.Trim)
+				Suggest.suggestbox.Items.Add(item.Trim)
 			End If
-        Next
+		Next
 	End Sub
 	
 End Module
