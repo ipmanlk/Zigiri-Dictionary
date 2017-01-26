@@ -83,7 +83,7 @@ Public Partial Class MainForm
 	End Sub
 	
 	Sub AutograbTick(sender As Object, e As EventArgs)
-		If String.IsNullOrEmpty(Clipboard.GetText)=False Then 
+		If String.IsNullOrEmpty(Clipboard.GetText)=False And String.IsNullOrEmpty(input.Text)=False Then 
 			SearchWord = Clipboard.GetText
 			originalsearchword = input.Text 
 			If SearchWord <> input.Text Then
