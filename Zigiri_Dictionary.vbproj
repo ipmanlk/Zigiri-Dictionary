@@ -78,11 +78,15 @@
     <Compile Include="Splash.Designer.vb">
       <DependentUpon>Splash.vb</DependentUpon>
     </Compile>
-    <Compile Include="Splash.vb" />
+    <Compile Include="Splash.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SuggestWords.Designer.vb">
       <DependentUpon>SuggestWords.vb</DependentUpon>
     </Compile>
-    <Compile Include="SuggestWords.vb" />
+    <Compile Include="SuggestWords.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CheckUpdates.vb" />
   </ItemGroup>
   <ItemGroup>

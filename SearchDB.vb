@@ -8,10 +8,13 @@ Public Module search
 	
 	Dim language As Boolean 	'0 = English 1= Sinhala
 	Public SearchWord As String
+	Dim meaninglang As String 
 	Dim count As Integer
 	Dim sugWord,SearchWord1stLetter,sugWord1stLetter,DataBaseTable As String
 	Public found As Boolean 
-	Public myversion As String = "0.1.1"
+	Dim originaldbtext As String
+	Public originalsearchword As String 
+	Public showed As Boolean
 	'0 = Mainform output box
 	'1=  Suggestion form output box
 	
@@ -24,21 +27,35 @@ Public Module search
 			If AscW(c) > 3457 And AscW(c) < 3576 Then 
 				GetMeaning("sndbase") 'if word is in sinhala, search on sinhala to english database.
 				language = 1
+				meaninglang="English"
 			Else
 				GetMeaning("endbase") 'if word is in english, search on english to sinhala database.
 				language = 0
+				meaninglang="Sinhala"
 				Exit For
 			End If
 		Next
 		
-		If found = False  Then 'if word not found, try to suggest words.
-			If language = 0 Then 
-				Call SuggestWords("endbase")
-			Else
-				Call SuggestWords("sndbase")
+		If showed = 0 And MainForm.traymeaning.Checked = True Then 
+			If found = False Then
+				MainForm.trayicon.ShowBalloonTip(1000, "", "Word not found!", ToolTipIcon.Info)	
+			Else 
+				MainForm.trayicon.ShowBalloonTip(1000,meaninglang & " meaning for " & SearchWord , originaldbtext, ToolTipIcon.Info)
 			End If
-			If found=False Then MsgBox("Word not found!") 'if suggestion failed, show not found msg.
-		End If
+			showed = 1
+		End If 
+		
+		If MainForm.autograb_checkbox.Checked = False Then
+			If found = False  Then 'if word not found, try to suggest words.
+				If language = 0 Then 
+					Call SuggestWords("endbase")
+				Else
+					Call SuggestWords("sndbase")
+				End If
+				If found=False Then MsgBox("Word not found!") 'if suggestion failed, show not found msg.
+			End If
+		End If 
+		
 	End Sub
 	
 	Public Sub GetMeaning(dbtable As String) 'search input word through databases and show meanings.
@@ -46,6 +63,7 @@ Public Module search
 		found = False 'Reset status of found variable
 		For count = 0 To ((ds.Tables(dbtable).Rows.Count)-1)
 			If ds.tables(dbtable).Rows(count).Item(0) = SearchWord Then
+				originaldbtext = ds.tables(dbtable).Rows(count).Item(1)
 				AddtoOutputListBox(ds.tables(dbtable).Rows(count).Item(1),0)	
 				count = ((ds.Tables(dbtable).Rows.Count)-1)
 			End If 

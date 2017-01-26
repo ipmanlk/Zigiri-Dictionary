@@ -5,6 +5,7 @@
 ' Time: 10:23 AM
 '
 Public Module CheckUpdates
+	Public myversion As String = "0.2.0"
 	Public Sub CheckforUpdate()
 		Try
 			Using client = New System.Net.WebClient()

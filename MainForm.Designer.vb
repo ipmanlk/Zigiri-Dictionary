@@ -34,8 +34,10 @@ Partial Class MainForm
 		Me.components = New System.ComponentModel.Container()
 		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
 		Me.groupBox1 = New System.Windows.Forms.GroupBox()
+		Me.traymeaning = New System.Windows.Forms.CheckBox()
 		Me.input = New System.Windows.Forms.TextBox()
 		Me.find = New System.Windows.Forms.Button()
+		Me.autograb_checkbox = New System.Windows.Forms.CheckBox()
 		Me.groupBox2 = New System.Windows.Forms.GroupBox()
 		Me.output = New System.Windows.Forms.ListBox()
 		Me.statusStrip = New System.Windows.Forms.StatusStrip()
@@ -47,6 +49,7 @@ Partial Class MainForm
 		Me.copyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.pictureBox1 = New System.Windows.Forms.PictureBox()
 		Me.checking_updates = New System.Windows.Forms.Panel()
+		Me.autograb = New System.Windows.Forms.Timer(Me.components)
 		Me.groupBox1.SuspendLayout
 		Me.groupBox2.SuspendLayout
 		Me.statusStrip.SuspendLayout
@@ -57,8 +60,10 @@ Partial Class MainForm
 		'
 		'groupBox1
 		'
+		Me.groupBox1.Controls.Add(Me.traymeaning)
 		Me.groupBox1.Controls.Add(Me.input)
 		Me.groupBox1.Controls.Add(Me.find)
+		Me.groupBox1.Controls.Add(Me.autograb_checkbox)
 		Me.groupBox1.Location = New System.Drawing.Point(7, 7)
 		Me.groupBox1.Name = "groupBox1"
 		Me.groupBox1.Size = New System.Drawing.Size(288, 79)
@@ -66,10 +71,21 @@ Partial Class MainForm
 		Me.groupBox1.TabStop = false
 		Me.groupBox1.Text = "Word"
 		'
+		'traymeaning
+		'
+		Me.traymeaning.BackColor = System.Drawing.Color.Transparent
+		Me.traymeaning.Location = New System.Drawing.Point(88, 55)
+		Me.traymeaning.Name = "traymeaning"
+		Me.traymeaning.Size = New System.Drawing.Size(104, 24)
+		Me.traymeaning.TabIndex = 4
+		Me.traymeaning.Text = "Quick Mode"
+		Me.traymeaning.UseVisualStyleBackColor = false
+		AddHandler Me.traymeaning.CheckedChanged, AddressOf Me.TraymeaningCheckedChanged
+		'
 		'input
 		'
 		Me.input.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.input.Location = New System.Drawing.Point(11, 29)
+		Me.input.Location = New System.Drawing.Point(11, 28)
 		Me.input.Name = "input"
 		Me.input.Size = New System.Drawing.Size(206, 26)
 		Me.input.TabIndex = 1
@@ -77,13 +93,24 @@ Partial Class MainForm
 		'
 		'find
 		'
-		Me.find.Location = New System.Drawing.Point(223, 28)
+		Me.find.Location = New System.Drawing.Point(223, 27)
 		Me.find.Name = "find"
 		Me.find.Size = New System.Drawing.Size(56, 28)
 		Me.find.TabIndex = 2
 		Me.find.Text = "Find"
 		Me.find.UseVisualStyleBackColor = true
 		AddHandler Me.find.Click, AddressOf Me.FindClick
+		'
+		'autograb_checkbox
+		'
+		Me.autograb_checkbox.BackColor = System.Drawing.Color.Transparent
+		Me.autograb_checkbox.Location = New System.Drawing.Point(11, 55)
+		Me.autograb_checkbox.Name = "autograb_checkbox"
+		Me.autograb_checkbox.Size = New System.Drawing.Size(104, 24)
+		Me.autograb_checkbox.TabIndex = 3
+		Me.autograb_checkbox.Text = "Auto Grab"
+		Me.autograb_checkbox.UseVisualStyleBackColor = false
+		AddHandler Me.autograb_checkbox.CheckedChanged, AddressOf Me.Autograb_checkboxCheckedChanged
 		'
 		'groupBox2
 		'
@@ -142,7 +169,7 @@ Partial Class MainForm
 		'trayicon
 		'
 		Me.trayicon.Icon = CType(resources.GetObject("trayicon.Icon"),System.Drawing.Icon)
-		Me.trayicon.Text = "notifyIcon1"
+		Me.trayicon.Text = "Zigiri Dictionary"
 		Me.trayicon.Visible = true
 		AddHandler Me.trayicon.MouseClick, AddressOf Me.TrayiconMouseClick
 		'
@@ -179,6 +206,10 @@ Partial Class MainForm
 		Me.checking_updates.TabIndex = 5
 		Me.checking_updates.Visible = false
 		'
+		'autograb
+		'
+		AddHandler Me.autograb.Tick, AddressOf Me.AutograbTick
+		'
 		'MainForm
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -208,11 +239,14 @@ Partial Class MainForm
 		Me.ResumeLayout(false)
 		Me.PerformLayout
 	End Sub
+	Friend traymeaning As System.Windows.Forms.CheckBox
+	Private autograb As System.Windows.Forms.Timer
+	Friend autograb_checkbox As System.Windows.Forms.CheckBox
 	Friend checking_updates As System.Windows.Forms.Panel
 	Private pictureBox1 As System.Windows.Forms.PictureBox
 	Private copyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Private rightclickmenu As System.Windows.Forms.ContextMenuStrip
-	Private trayicon As System.Windows.Forms.NotifyIcon
+	Friend trayicon As System.Windows.Forms.NotifyIcon
 	Private aboutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Private checkForUpdatesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Private toolStripDropDownButton1 As System.Windows.Forms.ToolStripDropDownButton
@@ -224,18 +258,7 @@ Partial Class MainForm
 	Private find As System.Windows.Forms.Button
 	
 	
-	Sub OutputMouseDown(sender As Object, e As MouseEventArgs)
-		If e.Button = Windows.Forms.MouseButtons.Right Then
-			rightclickmenu.Show(MousePosition)
-		End If 
-	End Sub
-	
-	Sub CopyToolStripMenuItemClick(sender As Object, e As EventArgs)
-		If String.IsNullOrEmpty(output.Text) Then 
-			MsgBox("Please select an item to copy!")
-		Else 
-			Clipboard.SetText(output.Text)
-		End If
+
 		
-	End Sub
+	
 End Class
