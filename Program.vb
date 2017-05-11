@@ -1,8 +1,8 @@
 ﻿'
 ' Created by SharpDevelop.
 ' User: IP-Man
-' Date: 3/3/2016
-' Time: 9:53 PM
+' Date: 5/11/2017
+' Time: 9:01 AM
 '
 Imports Microsoft.VisualBasic.ApplicationServices
 
@@ -20,9 +20,5 @@ Namespace My
 		Protected Overrides Sub OnCreateMainForm()
 			Me.MainForm = My.Forms.MainForm
 		End Sub
-		
-	    Protected Overrides Sub OnCreateSplashScreen()
-            Me.SplashScreen = My.Forms.Splash
-        End Sub
 	End Class
 End Namespace

@@ -8,12 +8,12 @@ Imports System.Runtime.InteropServices
 ' change them to the information which is associated with the assembly
 ' you compile.
 
-<assembly: AssemblyTitle("")>
+<assembly: AssemblyTitle("Zigiri_Dictionary")>
 <assembly: AssemblyDescription("")>
 <assembly: AssemblyConfiguration("")>
 <assembly: AssemblyCompany("")>
-<assembly: AssemblyProduct("Zigiri Dictionary")>
-<assembly: AssemblyCopyright("")>
+<assembly: AssemblyProduct("Zigiri_Dictionary")>
+<assembly: AssemblyCopyright("Copyright 2017")>
 <assembly: AssemblyTrademark("")>
 <assembly: AssemblyCulture("")>
 
@@ -28,4 +28,4 @@ Imports System.Runtime.InteropServices
 ' You can specify all values by your own or you can build default build and revision
 ' numbers with the '*' character (the default):
 
-<assembly: AssemblyVersion("0.2.0")>
+<assembly: AssemblyVersion("1.0.*")>
