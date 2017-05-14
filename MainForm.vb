@@ -20,6 +20,14 @@ Public Partial Class MainForm
 	End Sub
 	
 	Sub FindBtnClick(sender As Object, e As EventArgs)
-		Call FindLang(input.Text)
+		Call SearchMeaning(input.Text.Trim)
+	End Sub
+	
+	Sub OutputDoubleClick(sender As Object, e As EventArgs)
+		If suggest=True Then 
+			input.Text=output.SelectedItem.ToString
+			suggest=False
+			Call SearchMeaning(output.SelectedItem.ToString)
+		End If 
 	End Sub
 End Class

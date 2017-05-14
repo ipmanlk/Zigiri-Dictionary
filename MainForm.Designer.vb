@@ -51,7 +51,7 @@ Partial Class MainForm
 		Me.meaningGrp.Controls.Add(Me.output)
 		Me.meaningGrp.Location = New System.Drawing.Point(9, 82)
 		Me.meaningGrp.Name = "meaningGrp"
-		Me.meaningGrp.Size = New System.Drawing.Size(252, 180)
+		Me.meaningGrp.Size = New System.Drawing.Size(252, 186)
 		Me.meaningGrp.TabIndex = 3
 		Me.meaningGrp.TabStop = false
 		Me.meaningGrp.Text = "Meaning"
@@ -59,11 +59,15 @@ Partial Class MainForm
 		'output
 		'
 		Me.output.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.output.Font = New System.Drawing.Font("Malithi Web", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
 		Me.output.FormattingEnabled = true
+		Me.output.ItemHeight = 20
 		Me.output.Location = New System.Drawing.Point(3, 16)
 		Me.output.Name = "output"
-		Me.output.Size = New System.Drawing.Size(246, 161)
+		Me.output.Size = New System.Drawing.Size(246, 167)
+		Me.output.Sorted = true
 		Me.output.TabIndex = 0
+		AddHandler Me.output.DoubleClick, AddressOf Me.OutputDoubleClick
 		'
 		'smMode
 		'
@@ -76,10 +80,10 @@ Partial Class MainForm
 		'
 		'input
 		'
-		Me.input.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.input.Location = New System.Drawing.Point(9, 19)
+		Me.input.Font = New System.Drawing.Font("Malithi Web", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.input.Location = New System.Drawing.Point(9, 18)
 		Me.input.Name = "input"
-		Me.input.Size = New System.Drawing.Size(182, 26)
+		Me.input.Size = New System.Drawing.Size(182, 27)
 		Me.input.TabIndex = 9
 		'
 		'atoGrab
@@ -93,9 +97,9 @@ Partial Class MainForm
 		'
 		'findBtn
 		'
-		Me.findBtn.Location = New System.Drawing.Point(197, 19)
+		Me.findBtn.Location = New System.Drawing.Point(197, 18)
 		Me.findBtn.Name = "findBtn"
-		Me.findBtn.Size = New System.Drawing.Size(64, 26)
+		Me.findBtn.Size = New System.Drawing.Size(64, 27)
 		Me.findBtn.TabIndex = 7
 		Me.findBtn.Text = "Search"
 		Me.findBtn.UseVisualStyleBackColor = true
@@ -133,7 +137,7 @@ Partial Class MainForm
 	Private toolTip1 As System.Windows.Forms.ToolTip
 	Private statusStrip1 As System.Windows.Forms.StatusStrip
 	Friend output As System.Windows.Forms.ListBox
-	Private meaningGrp As System.Windows.Forms.GroupBox
+	Friend meaningGrp As System.Windows.Forms.GroupBox
 	Private atoGrab As System.Windows.Forms.CheckBox
 	Private input As System.Windows.Forms.TextBox
 	Private smMode As System.Windows.Forms.CheckBox

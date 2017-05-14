@@ -7,30 +7,64 @@
 Imports System.IO 
 Public Module Search
 	Dim langfile As String 
+	Dim found As Boolean
+	Public suggest As Boolean
 	
-	Sub FindLang(SearchWord As String)
+	Sub SearchMeaning(SearchWord As String)
+		MainForm.output.Items.Clear	
+		MainForm.meaningGrp.Text="Meaning"
+		
 		For Each c As Char In SearchWord 'Checking the language of input word.
 			If AscW(c) > 3457 And AscW(c) < 3576 Then 
  				langfile="sn2en"
 			Else
 				langfile="en2sn"
-				Exit For
 			End If
+		Exit For
 		Next
-		SearchMeaning(SearchWord)
+		
+		For Each Line As String In File.ReadLines(langfile)
+		If (Line.Split("-")(0))=SearchWord Then
+			AddtoOutputListBox(Line.Split("-")(1))
+			found=True
+			suggest=False
+			Exit For
+		Else 
+			found=False
+		End If	
+		Next
+		
+		If langfile="sn2en" Then 
+			For Each Line As String In File.ReadLines("en2sn")
+				If (Line.Split("-")(1)).Contains(SearchWord) Then
+					AddtoOutputListBox(Line.Split("-")(0))
+					found=True
+					suggest=False
+					Exit For
+				End If
+			Next	
+		End If
+		
+		If (found=False) Then 
+			MsgBox("Word not found!. Please check for word suggestions.",vbOKOnly,"Sorry!")
+			suggest=True
+			Call Suggestions(SearchWord)
+		End If
+		
 	End Sub
 	
-	Sub SearchMeaning(Word As String)
+	
+	Sub Suggestions(SearchWord As String)
+		MainForm.meaningGrp.Text="Word Suggestions"
 		For Each Line As String In File.ReadLines(langfile)
-			If Line.Split("-")(0) = Word Then
-				AddtoOutputListBox(Line.Split("-")(1))
-				Exit For
-			End If
+			If (Line.Split("-")(0)).Contains(SearchWord) Or SearchWord.Contains(Line.Split("-")(0)) And (Line.Split("-")(0)).Substring(0,1)=SearchWord.Substring(0,1) Then
+				AddtoOutputListBox(Line.Split("-")(0))
+			End If	
 		Next
+		
 	End Sub
 	
 	Sub AddtoOutputListBox(ByVal wordlist As String) 'Remove | & add meanings to output list boxes.	
-		MainForm.output.Items.Clear
 		Dim zigiriadd() As String = wordlist.Split("|")
 		For Each item As String In zigiriadd	
 			MainForm.output.Items.Add(item.Trim())
