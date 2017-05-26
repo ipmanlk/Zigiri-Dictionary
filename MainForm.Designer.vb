@@ -43,6 +43,7 @@ Partial Class MainForm
 		Me.findBtn = New System.Windows.Forms.Button()
 		Me.statusStrip1 = New System.Windows.Forms.StatusStrip()
 		Me.toolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+		Me.grabText = New System.Windows.Forms.Timer(Me.components)
 		Me.meaningGrp.SuspendLayout
 		Me.SuspendLayout
 		'
@@ -94,6 +95,7 @@ Partial Class MainForm
 		Me.atoGrab.TabIndex = 8
 		Me.atoGrab.Text = "Auto Grab"
 		Me.atoGrab.UseVisualStyleBackColor = true
+		AddHandler Me.atoGrab.CheckedChanged, AddressOf Me.AtoGrabCheckedChanged
 		'
 		'findBtn
 		'
@@ -112,6 +114,10 @@ Partial Class MainForm
 		Me.statusStrip1.Size = New System.Drawing.Size(271, 22)
 		Me.statusStrip1.TabIndex = 11
 		Me.statusStrip1.Text = "statusStrip1"
+		'
+		'grabText
+		'
+		AddHandler Me.grabText.Tick, AddressOf Me.GrabTextTick
 		'
 		'MainForm
 		'
@@ -134,12 +140,13 @@ Partial Class MainForm
 		Me.ResumeLayout(false)
 		Me.PerformLayout
 	End Sub
+	Private grabText As System.Windows.Forms.Timer
 	Private toolTip1 As System.Windows.Forms.ToolTip
 	Private statusStrip1 As System.Windows.Forms.StatusStrip
 	Friend output As System.Windows.Forms.ListBox
 	Friend meaningGrp As System.Windows.Forms.GroupBox
 	Private atoGrab As System.Windows.Forms.CheckBox
-	Private input As System.Windows.Forms.TextBox
+	Friend input As System.Windows.Forms.TextBox
 	Private smMode As System.Windows.Forms.CheckBox
 	Private findBtn As System.Windows.Forms.Button
 End Class

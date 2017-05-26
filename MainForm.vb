@@ -16,7 +16,9 @@ Public Partial Class MainForm
 	
 	
 	Sub MainFormLoad(sender As Object, e As EventArgs)
-		
+		If String.IsNullOrEmpty(Clipboard.GetText) Then
+			Clipboard.SetText("none")
+		End If
 	End Sub
 	
 	Sub FindBtnClick(sender As Object, e As EventArgs)
@@ -29,5 +31,19 @@ Public Partial Class MainForm
 			suggest=False
 			Call SearchMeaning(output.SelectedItem.ToString)
 		End If 
+	End Sub
+	
+	Sub GrabTextTick(sender As Object, e As EventArgs)
+		Call atoGrabText()
+	End Sub
+	
+	Sub AtoGrabCheckedChanged(sender As Object, e As EventArgs)
+		If atoGrab.Checked=True Then
+			grabText.Enabled=True 
+			errorshow=False
+		Else
+			grabText.Enabled=False
+			errorshow=True
+		End If
 	End Sub
 End Class

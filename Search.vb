@@ -9,6 +9,7 @@ Public Module Search
 	Dim langfile As String 
 	Dim found As Boolean
 	Public suggest As Boolean
+	Public errorshow As Boolean
 	
 	Sub SearchMeaning(SearchWord As String)
 		MainForm.output.Items.Clear	
@@ -45,7 +46,7 @@ Public Module Search
 			Next	
 		End If
 		
-		If (found=False) Then 
+		If (found=False And errorshow=True) Then 
 			MsgBox("Word not found!. Please check for word suggestions.",vbOKOnly,"Sorry!")
 			suggest=True
 			Call Suggestions(SearchWord)
