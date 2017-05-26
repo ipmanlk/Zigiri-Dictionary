@@ -5,19 +5,18 @@
 ' Time: 2:17 PM
 ' 
 '
-Public Module atoTextGrab
+Public Module AutoGrab
 	
 	Sub atoGrabText()
+		Clipboard.SetText(Clipboard.GetText.Trim)
 		Dim clipText As String = Clipboard.GetText 
 		Dim defText As String
 		
-		If (clipText<>defText And clipText<>"none") Then 
+		If (MainForm.input.Text<>clipText) Then 
 			clipText=clipText.Trim
+			defText=clipText
 			Call SearchMeaning(clipText)
 			MainForm.input.Text=clipText
-			defText=clipText
-			clipText="none"
-			Clipboard.SetText("none")
 		End If
 	End Sub
 	

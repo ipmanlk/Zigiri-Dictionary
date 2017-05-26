@@ -67,8 +67,10 @@ Public Module Search
 	
 	Sub AddtoOutputListBox(ByVal wordlist As String) 'Remove | & add meanings to output list boxes.	
 		Dim zigiriadd() As String = wordlist.Split("|")
-		For Each item As String In zigiriadd	
-			MainForm.output.Items.Add(item.Trim())
+		For Each item As String In zigiriadd
+			If Not(String.IsNullOrEmpty(item.Trim)) Then 
+				MainForm.output.Items.Add(item.Trim())
+			End If
 		Next
 	End Sub
 	
