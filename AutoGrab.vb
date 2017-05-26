@@ -8,7 +8,7 @@
 Public Module AutoGrab
 	
 	Sub atoGrabText()
-		Clipboard.SetText(Clipboard.GetText.Trim)
+		Clipboard.SetText((Clipboard.GetText.Trim).ToLower)
 		Dim clipText As String = Clipboard.GetText 
 		Dim defText As String
 		

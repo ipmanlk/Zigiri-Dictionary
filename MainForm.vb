@@ -79,7 +79,7 @@ Public Partial Class MainForm
 		Else
 			Me.Height=348
 			trayMeaning.Checked=False 
-			trayMeaning.Checked=True
+			trayMeaning.Enabled=True
 		End If
 	End Sub
 	
@@ -129,7 +129,7 @@ Public Partial Class MainForm
 		If String.IsNullOrEmpty(input.Text.Trim) Then
 			MsgBox("Please enter something to search!")
 		Else
-			Call SearchMeaning(input.Text.Trim)
+			Call SearchMeaning((input.Text.Trim).ToLower)
 		End If
 	End Sub
 

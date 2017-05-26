@@ -18,11 +18,11 @@ Public Module Search
 		sWord=SearchWord
 		For Each c As Char In SearchWord 'Checking the language of input word.
 			If AscW(c) > 3457 And AscW(c) < 3576 Then 
-				langfile="sn2en"
+				langfile="db/sn2en"
 				My.Forms.MainForm.Text="ZD-Sinhala to English"
 				meaninglang="English"
 			Else
-				langfile="en2sn"
+				langfile="db/en2sn"
 				My.Forms.MainForm.Text="ZD-English to Sinhala"
 				meaninglang="Sinhala"
 			End If
