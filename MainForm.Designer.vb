@@ -97,6 +97,7 @@ Partial Class MainForm
 		Me.input.Name = "input"
 		Me.input.Size = New System.Drawing.Size(203, 27)
 		Me.input.TabIndex = 9
+		AddHandler Me.input.KeyPress, AddressOf Me.InputKeyPress
 		'
 		'atoGrab
 		'
@@ -159,7 +160,7 @@ Partial Class MainForm
 		'notifyIcon
 		'
 		Me.notifyIcon.Icon = CType(resources.GetObject("notifyIcon.Icon"),System.Drawing.Icon)
-		Me.notifyIcon.Text = "notifyIcon"
+		Me.notifyIcon.Text = "Zigiri Dictionary"
 		Me.notifyIcon.Visible = true
 		AddHandler Me.notifyIcon.Click, AddressOf Me.NotifyIconClick
 		'

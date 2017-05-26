@@ -22,7 +22,13 @@ Public Partial Class MainForm
 	End Sub
 	
 	Sub FindBtnClick(sender As Object, e As EventArgs)
-		Call SearchMeaning(input.Text.Trim)
+		Call StartSearch()
+	End Sub
+		
+	Sub InputKeyPress(sender As Object, e As KeyPressEventArgs)
+		If e.KeyChar = ChrW(Keys.Enter) Then
+			Call StartSearch()
+		End If
 	End Sub
 	
 	Sub OutputDoubleClick(sender As Object, e As EventArgs)
@@ -38,12 +44,11 @@ Public Partial Class MainForm
 	End Sub
 	
 	Sub AtoGrabCheckedChanged(sender As Object, e As EventArgs)
+		Call ShowErrors()
 		If atoGrab.Checked=True Then
 			grabText.Enabled=True 
-			errorshow=False
 		Else
 			grabText.Enabled=False
-			errorshow=True
 		End If
 	End Sub
 	
@@ -66,10 +71,15 @@ Public Partial Class MainForm
 	End Sub
 	
 	Sub SmModeCheckedChanged(sender As Object, e As EventArgs)
+		Call ShowErrors()
 		If smMode.Checked=True Then
 			Me.Height=133
+			trayMeaning.Checked=True 
+			trayMeaning.Enabled=False
 		Else
 			Me.Height=348
+			trayMeaning.Checked=False 
+			trayMeaning.Checked=True
 		End If
 	End Sub
 	
@@ -102,4 +112,25 @@ Public Partial Class MainForm
 	Sub InfoBtnButtonClick(sender As Object, e As EventArgs)
 		MsgBox("Current version : " & myversion.ToString & vbNewLine & ".NET Framework : 4.0",vbInformation,"Zigiri Dictionary "  & myversion)
 	End Sub
+	
+	Sub ShowErrors()
+		If (atoGrab.Checked=True And smMode.Checked=True) Then
+			errorshow=True
+		Else If (atoGrab.Checked=False And smMode.Checked=False) Then
+			errorshow=True
+		ElseIf (atoGrab.Checked=False And smMode.Checked=True) Then
+			errorshow=True
+		Else If (atoGrab.Checked=True And smMode.Checked=False) Then
+			errorshow=False
+		End If
+	End Sub
+	
+	Sub StartSearch()
+		If String.IsNullOrEmpty(input.Text.Trim) Then
+			MsgBox("Please enter something to search!")
+		Else
+			Call SearchMeaning(input.Text.Trim)
+		End If
+	End Sub
+
 End Class

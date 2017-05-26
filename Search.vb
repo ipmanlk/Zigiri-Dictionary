@@ -56,7 +56,7 @@ Public Module Search
 				suggest=True
 				Call Suggestions(SearchWord)
 			Else 
-				MainForm.notifyIcon.ShowBalloonTip(1000, "", "Word not found!", ToolTipIcon.Info)	
+				MainForm.notifyIcon.ShowBalloonTip(1000, "Zigiri Dictionary", "Word not found!", ToolTipIcon.Info)	
 			End If 
 		End If
 	End Sub
@@ -72,8 +72,7 @@ Public Module Search
 		
 	End Sub
 	
-	Sub AddtoOutputListBox(ByVal wordlist As String) 'Remove | & add meanings to output list boxes.		
-		
+	Sub AddtoOutputListBox(ByVal wordlist As String) 'Remove | & add meanings to output list boxes.			
 		If tm=True Then 
 			MainForm.notifyIcon.ShowBalloonTip(1000,meaninglang & " meaning for " & sWord , wordlist, ToolTipIcon.Info)
 		End If
