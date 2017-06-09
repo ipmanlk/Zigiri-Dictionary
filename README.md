@@ -18,7 +18,7 @@ This application supports for both, Sinhala to English and English to Sinhala tr
 - Project : https://www.navinda.space/software/zigiri-dictionary
 
 ##Contact Me
-- EMail : contact@ipman98.96.lt (Outdated!)
+- EMail : navilk@zoho.com
 
 ##Download
 1. You can download this project in zip or tar format.
