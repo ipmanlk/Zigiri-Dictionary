@@ -16,6 +16,8 @@ Public Module Search
 		MainForm.output.Items.Clear	
 		MainForm.meaningGrp.Text="Meaning"
 		sWord=SearchWord
+		SearchWord=SearchWord.Replace(" ","-")
+		
 		For Each c As Char In SearchWord 'Checking the language of input word.
 			If AscW(c) > 3457 And AscW(c) < 3576 Then 
 				langfile="db/sn2en"
@@ -29,10 +31,11 @@ Public Module Search
 			Exit For
 		Next
 		
+		'Search the meaning
 		For Each Line As String In File.ReadLines(langfile)
-			If (Line.Split("-")(0))=SearchWord Then
+			If ((Line.Split("#")(0)).ToLower)=SearchWord Then
 				found=True
-				AddtoOutputListBox(Line.Split("-")(1))
+				AddtoOutputListBox(Line.Split("#")(1))
 				suggest=False
 				Exit For
 			Else 
@@ -40,32 +43,23 @@ Public Module Search
 			End If	
 		Next
 		
-		If langfile="sn2en" Then 
-			For Each Line As String In File.ReadLines("en2sn")
-				If (Line.Split("-")(1)).Contains(SearchWord) Then
-					AddtoOutputListBox(Line.Split("-")(0))
-					suggest=False
-					Exit For
-				End If
-			Next	
-		End If
-		
+		'If word is not found
 		If (found=False And errorshow=True) Then 
 			If tm=False Then 
 				MsgBox("Word not found!. Please check for word suggestions.",vbOKOnly,"Sorry!")
 				suggest=True
-				Call Suggestions(SearchWord)
+				Call Suggestions(SearchWord) 'Show suggestions
 			Else 
 				MainForm.notifyIcon.ShowBalloonTip(1000, "Zigiri Dictionary", "Word not found!", ToolTipIcon.Info)	
 			End If 
 		End If
 	End Sub
 	
-	
+	'Suggestions if input word is not found
 	Sub Suggestions(SearchWord As String)
 		MainForm.meaningGrp.Text="Word Suggestions"
 		For Each Line As String In File.ReadLines(langfile)
-			If (Line.Split("-")(0)).Contains(SearchWord) Or SearchWord.Contains(Line.Split("-")(0)) And (Line.Split("-")(0)).Substring(0,1)=SearchWord.Substring(0,1) Then
+			If (Line.Split("#")(0)).Contains(SearchWord) Or SearchWord.Contains(Line.Split("#")(0)) And (Line.Split("#")(0)).Substring(0,1)=SearchWord.Substring(0,1) Then
 				AddtoOutputListBox(Line.Split("-")(0))
 			End If	
 		Next
@@ -73,11 +67,12 @@ Public Module Search
 	End Sub
 	
 	Sub AddtoOutputListBox(ByVal wordlist As String) 'Remove | & add meanings to output list boxes.			
-		If tm=True Then 
+		'if tray meaning is enabled
+		If tm=True Then
 			MainForm.notifyIcon.ShowBalloonTip(1000,meaninglang & " meaning for " & sWord , wordlist, ToolTipIcon.Info)
-		End If
-		
-		If tm=False Then
+			
+			'if tray meaning is disabled
+		Else
 			Dim zigiriadd() As String = wordlist.Split("|")
 			For Each item As String In zigiriadd
 				If Not(String.IsNullOrEmpty(item.Trim)) Then 
