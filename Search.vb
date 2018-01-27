@@ -20,11 +20,11 @@ Public Module Search
 		
 		For Each c As Char In SearchWord 'Checking the language of input word.
 			If AscW(c) > 3457 And AscW(c) < 3576 Then 
-				langfile="db/sn2en"
+				langfile="db/sn2en.txt"
 				My.Forms.MainForm.Text="ZD-Sinhala to English"
 				meaninglang="English"
 			Else
-				langfile="db/en2sn"
+				langfile="db/en2sn.txt"
 				My.Forms.MainForm.Text="ZD-English to Sinhala"
 				meaninglang="Sinhala"
 			End If
@@ -58,10 +58,18 @@ Public Module Search
 	'Suggestions if input word is not found
 	Sub Suggestions(SearchWord As String)
 		MainForm.meaningGrp.Text="Word Suggestions"
+		Dim current_word As String
+		Dim current_word_char As Char 'first character of current word
+		Dim search_word_char As Char=SearchWord(0) 'first character of search word
+		
 		For Each Line As String In File.ReadLines(langfile)
-			If (Line.Split("#")(0)).Contains(SearchWord) Or SearchWord.Contains(Line.Split("#")(0)) And (Line.Split("#")(0)).Substring(0,1)=SearchWord.Substring(0,1) Then
-				AddtoOutputListBox(Line.Split("-")(0))
-			End If	
+			current_word=Line.Split("#")(0)
+			If (current_word.Contains(SearchWord)) Then
+				current_word_char=current_word(0)
+				If (current_word_char=search_word_char) Then
+					AddtoOutputListBox(Line.Split("#")(0))
+				End If
+			End If
 		Next
 		
 	End Sub
