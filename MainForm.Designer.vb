@@ -43,7 +43,6 @@ Partial Class MainForm
 		Me.findBtn = New System.Windows.Forms.Button()
 		Me.statusStrip = New System.Windows.Forms.StatusStrip()
 		Me.infoBtn = New System.Windows.Forms.ToolStripSplitButton()
-		Me.UpdateBtn = New System.Windows.Forms.ToolStripMenuItem()
 		Me.AboutBtn = New System.Windows.Forms.ToolStripMenuItem()
 		Me.toolTip1 = New System.Windows.Forms.ToolTip(Me.components)
 		Me.grabText = New System.Windows.Forms.Timer(Me.components)
@@ -131,7 +130,7 @@ Partial Class MainForm
 		'infoBtn
 		'
 		Me.infoBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-		Me.infoBtn.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UpdateBtn, Me.AboutBtn})
+		Me.infoBtn.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutBtn})
 		Me.infoBtn.Image = CType(resources.GetObject("infoBtn.Image"),System.Drawing.Image)
 		Me.infoBtn.ImageTransparentColor = System.Drawing.Color.Magenta
 		Me.infoBtn.Name = "infoBtn"
@@ -139,17 +138,10 @@ Partial Class MainForm
 		Me.infoBtn.Text = "infoButton"
 		AddHandler Me.infoBtn.ButtonClick, AddressOf Me.InfoBtnButtonClick
 		'
-		'UpdateBtn
-		'
-		Me.UpdateBtn.Name = "UpdateBtn"
-		Me.UpdateBtn.Size = New System.Drawing.Size(173, 22)
-		Me.UpdateBtn.Text = "Check For Updates"
-		AddHandler Me.UpdateBtn.Click, AddressOf Me.UpdateBtnClick
-		'
 		'AboutBtn
 		'
 		Me.AboutBtn.Name = "AboutBtn"
-		Me.AboutBtn.Size = New System.Drawing.Size(173, 22)
+		Me.AboutBtn.Size = New System.Drawing.Size(152, 22)
 		Me.AboutBtn.Text = "About"
 		AddHandler Me.AboutBtn.Click, AddressOf Me.AboutBtnClick
 		'
@@ -215,7 +207,6 @@ Partial Class MainForm
 	End Sub
 	Private trayMeaning As System.Windows.Forms.CheckBox
 	Private AboutBtn As System.Windows.Forms.ToolStripMenuItem
-	Private UpdateBtn As System.Windows.Forms.ToolStripMenuItem
 	Private infoBtn As System.Windows.Forms.ToolStripSplitButton
 	Private copyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Private contextMenu As System.Windows.Forms.ContextMenuStrip

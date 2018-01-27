@@ -5,6 +5,7 @@
 ' Time: 9:01 AM
 ' 
 Public Partial Class MainForm
+	Public myversion As String="0.4.0"	
 	Public Sub New()
 		' The Me.InitializeComponent call is required for Windows Forms designer support.
 		Me.InitializeComponent()
@@ -66,10 +67,6 @@ Public Partial Class MainForm
 		End If
 	End Sub
 	
-	Sub UpdateBtnClick(sender As Object, e As EventArgs)
-		Call CheckforUpdates()
-	End Sub
-	
 	Sub SmModeCheckedChanged(sender As Object, e As EventArgs)
 		Call ShowErrors()
 		If smMode.Checked=True Then
@@ -106,7 +103,7 @@ Public Partial Class MainForm
 	
 	Sub AboutBtnClick(sender As Object, e As EventArgs)
 		MsgBox("Version " & myversion & vbNewLine & "Developed By Navinda Dissanayake." & 
-			vbNewLine & "Visit : www.navinda.space for more information.")	
+			vbNewLine & "Visit : www.navinda.xyz for more information.")	
 	End Sub
 	
 	Sub InfoBtnButtonClick(sender As Object, e As EventArgs)

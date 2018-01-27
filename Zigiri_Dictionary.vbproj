@@ -67,7 +67,6 @@
     <Compile Include="Program.vb" />
     <Compile Include="Properties\AssemblyInfo.vb" />
     <Compile Include="Search.vb" />
-    <Compile Include="Updates.vb" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
